@@ -9,14 +9,16 @@ class CustomButtonWidget extends StatelessWidget {
   final String image;
   final double borderwidth;
   final bool asAction;
+  final VoidCallback onTap;
 
-  CustomButtonWidget({this.child,this.size,this.borderwidth=2,this.image,this.asAction=false});
+  CustomButtonWidget({this.child,this.size,this.borderwidth=2,this.image,this.asAction=false
+  ,this.onTap});
 
   var boxdecoration=BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(200)),
     border: Border.all(
         width: 2,
-        color: AppColors.darkBlue
+        color:AppColors.darkBlue
     ),
     boxShadow:
     [BoxShadow(
@@ -26,7 +28,7 @@ class CustomButtonWidget extends StatelessWidget {
       spreadRadius: 3,
     ),
       BoxShadow(
-        color: Colors.white,
+        color: Colors.white38,
         blurRadius: 5,
         offset: Offset(-5,-5),
         spreadRadius: 3,
@@ -84,6 +86,13 @@ class CustomButtonWidget extends StatelessWidget {
         width: size,
         height: size,
         decoration:boxdecoration ,
-        child: child);
+        child: FlatButton(
+          padding: EdgeInsets.all(0),
+          onPressed: onTap,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(200))
+          ),
+          child: child??Container(),
+        ));
   }
 }

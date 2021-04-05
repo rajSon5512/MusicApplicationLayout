@@ -1,6 +1,7 @@
 import 'package:app_music_player/core/const.dart';
 import 'package:app_music_player/models/music_model.dart';
 import 'package:app_music_player/widget/custom_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatefulWidget {
@@ -11,11 +12,14 @@ class ListPage extends StatefulWidget {
 class _ListPageState extends State<ListPage> {
 
   List<MusicModel> _list;
+  int _playid;
+
 
   @override
   void initState() {
     // TODO: implement initState
     _list=MusicModel.list;
+    _playid=3;
     super.initState();
   }
 
@@ -42,12 +46,15 @@ class _ListPageState extends State<ListPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomButtonWidget(child: Icon(Icons.favorite),
-                    size: 50,),
+                    size: 50,
+                    onTap: (){},),
                     CustomButtonWidget(image: 'assets/logo.jpg',
                     size: 150,
-                    borderwidth: 6,),
+                    borderwidth: 6,
+                        onTap: (){}),
                     CustomButtonWidget(child: Icon(Icons.menu),
-                    size: 50,)
+                    size: 50,
+                        onTap: (){})
                   ],
                 ),
 
@@ -56,7 +63,14 @@ class _ListPageState extends State<ListPage> {
                 child: ListView.builder(
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context,index){
-                    return Container(
+                    return AnimatedContainer(
+                      padding: EdgeInsets.all(10),
+                      duration: Duration(milliseconds: 500),
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color:_list[index].id==_playid?AppColors.activeColor:AppColors.mainColor,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
                       child: Padding(
                         padding: EdgeInsets.all(16),
                         child: Row(
@@ -78,9 +92,15 @@ class _ListPageState extends State<ListPage> {
                               ],
                             ),
                             CustomButtonWidget(
-                              child: Icon(Icons.play_arrow),
-                              size: 30,
-                              asAction: false,
+                              child: Icon(_list[index].id==_playid?Icons.pause:Icons.play_arrow
+                              ,color: Colors.black,),
+                              size: 50,
+                              asAction: _list[index].id==_playid,
+                                onTap: (){
+                                  setState(() {
+                                    _playid=_list[index].id;
+                                  });
+                                }
                             )
                           ],
                         ),

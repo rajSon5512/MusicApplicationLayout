@@ -1,4 +1,5 @@
 import 'package:app_music_player/core/const.dart';
+import 'package:app_music_player/pages/details_page.dart';
 import 'package:app_music_player/models/music_model.dart';
 import 'package:app_music_player/widget/custom_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +52,11 @@ class _ListPageState extends State<ListPage> {
                     CustomButtonWidget(image: 'assets/logo.jpg',
                     size: 150,
                     borderwidth: 6,
-                        onTap: (){}),
+                        onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder:(_)=>DetailsPage() ),
+                            );
+                        }),
                     CustomButtonWidget(child: Icon(Icons.menu),
                     size: 50,
                         onTap: (){})

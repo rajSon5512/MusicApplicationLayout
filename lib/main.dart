@@ -1,5 +1,6 @@
+import 'package:app_music_player/pages/listpage.dart';
 import 'package:flutter/material.dart';
-import 'package:app_music_player/models/listpage.dart';
+
 
 void main()=>runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ListPage(),
+      home:ListPage()
     );
   }
 }

@@ -9,6 +9,10 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+
+  double indicator=0.1;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +66,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 fontSize: 19,height: 2),),
             SizedBox(height: 50,),
             LinearProgressIndicator(
-              value: 0.1,
+              value: indicator,
             ),
             Expanded(child: SizedBox()),
             Padding(
@@ -73,8 +77,11 @@ class _DetailsPageState extends State<DetailsPage> {
                   CustomButtonWidget(
                     size: 80,
                     onTap: (){
-                      Navigator.of(context).pop();
-                    },
+                      setState(() {
+                        indicator=indicator-0.1;
+                      });
+
+                      },
                     child: Icon(
                       Icons.fast_rewind,
                       color: AppColors.styleColor,
@@ -83,7 +90,6 @@ class _DetailsPageState extends State<DetailsPage> {
                   CustomButtonWidget(
                     size: 80,
                     onTap: (){
-                      Navigator.of(context).pop();
                     },
                     child: Icon(
                       Icons.pause,
@@ -95,7 +101,9 @@ class _DetailsPageState extends State<DetailsPage> {
                   CustomButtonWidget(
                     size: 80,
                     onTap: (){
-                      Navigator.of(context).pop();
+                      setState(() {
+                        indicator=indicator+0.1;
+                      });
                     },
                     child: Icon(
                       Icons.fast_forward,
